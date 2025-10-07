@@ -3,21 +3,26 @@
       class="list-group-item d-flex justify-content-between align-items-center">
     
     <div>
-      <span>
+      <input 
+        type="checkbox" 
+        [checked]="task.completed" 
+        (change)="toggleTask(task.id)" 
+        class="form-check-input me-2">
+
+      <span [style.textDecoration]="task.completed ? 'line-through' : 'none'">
         {{ task.id }}. {{ task.title }} - {{ task.user }}
       </span>
     </div>
-
-    <button (click)="deleteTask(task.id)" class="btn btn-danger btn-sm">
-      Delete
-    </button>
   </li>
 </ul>
 
 <hr>
 
 <div class="text-center mt-3">
-  <button class="btn btn-primary" routerLink="/form">
-    ➕ Add New Task
-  </button>
+  <h5>📋 Task Summary</h5>
+  <p><strong>Total Tasks:</strong> {{ taskService.getTaskCount() }}</p>
+  <p><strong>Completed:</strong> {{ taskService.getCompletedCount() }}</p>
+  <p><strong>Pending:</strong> {{ taskService.getPendingCount() }}</p>
 </div>
+
+<hr>
